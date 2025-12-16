@@ -20,7 +20,7 @@ const Navbar = () => {
         <div className="flex flex-col gap-3 md:flex-row justify-between items-center">
             {/* <div className=''>{user && user.email}</div> */}
             <div className=''>
-                <h1 className='text-green-600 font-extrabold text-2xl'>GreenNest</h1>
+                <h1 className='text-green-600 font-extrabold text-2xl'>PawMart</h1>
             </div>
             <div className="nav flex gap-5">
                 <NavLink to="/" className={({ isActive }) => isActive ?
