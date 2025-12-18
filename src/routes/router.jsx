@@ -8,51 +8,63 @@ import MyProfile from "../pages/MyProfile";
 
 import PriviteRoute from "../provider/PriviteRoute";
 import Error from "../components/Error";
-import Animals from "../pages/Animals";
+import Services from "../pages/Services";
 import AnimalDetails from "../pages/AnimalDetails";
-
-
+import AddServices from "../pages/AddServices";
 
 
 export const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <HomeLayout></HomeLayout>,
-        children: [
-            {
-                index: true,
-                element: <Home></Home>
-            },
-            {
-                path: '/animals',
-                element: <Animals></Animals>
-            },
-            {
-                path: '/login',
-                element: <Login></Login>
-            },
-            {
-                path: '/signup',
-                element: <SignUp></SignUp>
-            },
-            {
-                path: '/animals/:animalId',
-                element: <PriviteRoute>
-                   <AnimalDetails></AnimalDetails>
-                </PriviteRoute>
-            },
-            {
-                path: '/myprofile',
-                element: <PriviteRoute>
-                    <MyProfile></MyProfile>
-                </PriviteRoute>
-            },
-        ]
-    },
-    {
-        path: '/*',
-        element: <Error></Error>
-    }
-])
+  {
+    path: "/",
+    element: <HomeLayout></HomeLayout>,
+    children: [
+      {
+        index: true,
+        element: <Home></Home>,
+      },
+      {
+        path: "/services",
+        element: <Services></Services>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/signup",
+        element: <SignUp></SignUp>,
+      },
+      {
+        path: "/services/:serviceId",
+        element: (
+          <PriviteRoute>
+            <AnimalDetails></AnimalDetails>
+          </PriviteRoute>
+        ),
+      },
+      {
+        path: "/myprofile",
+        element: (
+          <PriviteRoute>
+            <MyProfile></MyProfile>
+          </PriviteRoute>
+        ),
+      },
+      {
+        path: "/addservices",
+        element: (
+          <PriviteRoute>
+            <AddServices></AddServices>
+          </PriviteRoute>
+        ),
+      },
+     
+    ],
+  },
+  {
+    path: "/*",
+    element: <Error></Error>,
+  },
+]);
 
 export default router;
