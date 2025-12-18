@@ -5,23 +5,24 @@ const Services = () => {
   const [service, setServices] = useState([]);
 
   useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const response = await fetch("/services.json");
-        const servicesData = await response.json();
+    fetch("http://localhost:3000/services")
+      .then((res) => res.json())
+      .then((servicesData) => {
         setServices(servicesData);
-      } catch (error) {
+      })
+      .catch((error) => {
         console.error("Error fetching services:", error);
-      }
-    };
-    fetchServices();
+      });
   }, []);
+  console.log(service);
+
   return (
     <div className="space-y-12">
       <section className="text-center">
         <h2 className="text-3xl font-bold text-green-700 mb-6">
           Top Rated Indoor Animal
         </h2>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {service.map((serviceItem) => (
             <div
@@ -33,13 +34,18 @@ const Services = () => {
                 alt={serviceItem.serviceName}
                 className="w-full h-[450px] object-cover rounded-lg"
               />
+
               <h3 className="text-xl font-semibold mt-3">
                 {serviceItem.serviceName}
               </h3>
+
               <p className="text-green-600 font-medium">${serviceItem.price}</p>
+
               <p className="text-yellow-500">{serviceItem.rating}</p>
+              {/* error */}
+
               <Link
-                to={`/services/${serviceItem.serviceId}`}
+                to={`/services/${serviceItem._id}`}
                 className="mt-3 inline-block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
               >
                 View Details
