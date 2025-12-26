@@ -11,7 +11,9 @@ import Error from "../components/Error";
 import Services from "../pages/Services";
 import AnimalDetails from "../pages/AnimalDetails";
 import AddServices from "../pages/AddServices";
-
+import MyServervices from "../pages/MyServices";
+import MyServices from "../pages/MyServices";
+import UpdateService from "../pages/UpdateService";
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +28,7 @@ export const router = createBrowserRouter([
         path: "/services",
         element: <Services></Services>,
       },
-      
+
       {
         path: "/login",
         element: <Login></Login>,
@@ -52,14 +54,29 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/addservices",
+        path: "/add-services",
         element: (
           <PriviteRoute>
             <AddServices></AddServices>
           </PriviteRoute>
         ),
       },
-     
+      {
+        path: "/my-services",
+        element: (
+          <PriviteRoute>
+          <MyServices></MyServices>
+          </PriviteRoute>
+        ),
+      },
+        {
+        path: "/update-service/:id",
+        element: (
+          <PriviteRoute>
+          <UpdateService></UpdateService>
+          </PriviteRoute>
+        ),
+      },
     ],
   },
   {

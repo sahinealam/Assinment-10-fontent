@@ -6,7 +6,7 @@ const Home = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetch("/services.json")
+    fetch("http://localhost:3000/services")
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, []);
@@ -35,10 +35,10 @@ const Home = () => {
                   {animal.serviceName}
                 </h3>
                 <p className="text-green-600 font-medium">${animal.price}</p>
-                <p className="text-yellow-500">{animal.rating}</p>
+                <p className="text-yellow-500">{animal?.date}</p>
                 {/* error */}
                 <Link
-                  to={`/services/${animal.serviceId}`}
+                  to={`/services/${animal?._id}`}
                   className="mt-3 inline-block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
                 >
                   View Details
