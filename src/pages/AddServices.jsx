@@ -3,6 +3,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const AddServices = () => {
   const { user } = useContext(AuthContext);
@@ -31,8 +32,14 @@ const AddServices = () => {
 
     console.log(fromData);
     try {
-      await addDoc(collection(db, "services"), fromData);
-      toast.success("Service added successfully!");
+      // await addDoc(collection(db, "services"), fromData);
+      axios.post('http://localhost:3000/services', fromData).then((response) => {
+        toast.success("Service added successfully!");
+        console.log('Service added:', response.data);
+      }).catch((error) => {
+        console.error('Error adding service:', error);
+      });
+      
       e.target.reset();
     } catch (error) {
       console.error("Error adding document: ", error);
