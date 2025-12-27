@@ -27,19 +27,23 @@ const AddServices = () => {
       description,
       image,
       date,
-      providerName: email, // or something
+      providerName: user.displayName,
+      email: user.email,
     };
 
     console.log(fromData);
     try {
       // await addDoc(collection(db, "services"), fromData);
-      axios.post('http://localhost:3000/services', fromData).then((response) => {
-        toast.success("Service added successfully!");
-        console.log('Service added:', response.data);
-      }).catch((error) => {
-        console.error('Error adding service:', error);
-      });
-      
+      axios
+        .post("http://localhost:3000/services", fromData)
+        .then((response) => {
+          toast.success("Service added successfully!");
+          console.log("Service added:", response.data);
+        })
+        .catch((error) => {
+          console.error("Error adding service:", error);
+        });
+
       e.target.reset();
     } catch (error) {
       console.error("Error adding document: ", error);

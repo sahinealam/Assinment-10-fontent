@@ -59,7 +59,7 @@ const UpdateService = () => {
           <input
             type="text"
             name="name"
-            defaultValue={service?.name}
+            defaultValue={service?.serviceName}
             required
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
