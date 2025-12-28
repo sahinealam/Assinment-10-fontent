@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 
 const UpdateService = () => {
@@ -8,6 +8,7 @@ const UpdateService = () => {
   const { id } = useParams();
   const [service, setService] = useState();
   const [category, setCatagory] = useState(service?.category);
+  const navigation= useNavigate()
   useEffect(() => {
     axios.get(`http://localhost:3000/services/${id}`).then((res) => {
       setService(res.data);
@@ -44,6 +45,7 @@ const UpdateService = () => {
       .put(`http://localhost:3000/update/${id}`, fromData)
       .then((res) => {
         console.log(res.data);
+        navigation('/my-services')
       })
       .catch((error) => {
         console.log(error);

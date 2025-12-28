@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Link } from "react-router";
+import axios from "axios";
 
 const MyServices = () => {
   const [myservice, setMyServices] = useState([]);
@@ -16,9 +17,24 @@ const MyServices = () => {
       });
   }, [user?.email]);
   console.log(myservice);
+  // delete myservice
+  const hadleDelete = (id) => {
+    axios
+      .delete(`http://localhost:3000/delete/${id}`)
+
+      .then((res) => {
+        console.log(res.data);
+        const filterData = myservice.filter((service)=> service._id != id )
+        console.log(filterData);
+        setMyServices(filterData)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div>
-      Myservices
+     
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -57,14 +73,21 @@ const MyServices = () => {
                 </td>
                 <td>Purple</td>
                 <th className="flex p-2 gap-2">
-                  <button className="btn btn-error btn-xs">Delete</button>
-                  <Link to={`/update-service/${service?._id}`}><button className="btn btn-primary btn-xs">Edit</button></Link>
+                  <button
+                    className="btn btn-error btn-xs"
+                    onClick={() => hadleDelete(service?._id)}
+                  >
+                    Delete
+                  </button>
+                  <Link to={`/update-service/${service?._id}`}>
+                    <button className="btn btn-primary btn-xs">Edit</button>
+                  </Link>
                 </th>
               </tr>
             ))}
           </tbody>
           {/* foot */}
-          <tfoot>
+          {/* <tfoot>
             <tr>
               <th></th>
               <th>Name</th>
@@ -72,7 +95,7 @@ const MyServices = () => {
               <th>Favorite Color</th>
               <th></th>
             </tr>
-          </tfoot>
+          </tfoot> */}
         </table>
       </div>
     </div>
