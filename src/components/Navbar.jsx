@@ -38,7 +38,10 @@ const Navbar = () => {
         >
           Services
         </NavLink>
-        <NavLink
+       {
+        user && (
+          <>
+           <NavLink
           to="/add-services"
           className={({ isActive }) =>
             isActive ? "text-green-500 underline" : ""
@@ -62,6 +65,9 @@ const Navbar = () => {
         >
           My Profile
         </NavLink>
+          </>
+        )
+       }
       </div>
 
       <div className="flex justify-center items-center gap-4">
