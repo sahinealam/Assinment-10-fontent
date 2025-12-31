@@ -89,38 +89,58 @@ const AnimalDetails = () => {
           <p className="text-gray-400 mt-5">{animal.description}</p>
         </div>
       </div>
+      {/* Model Stert */}
+      {/* You can open the modal using document.getElementById('ID').showModal() method */}
+      <button
+        className="btn"
+        onClick={() => document.getElementById("my_modal_3").showModal()}
+      >
+     Adapt/Oder
+      </button>
+      <dialog id="my_modal_3" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+           {/* form copy */}
+            <form className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
+              <legend className="fieldset-legend"> Order details</legend>
 
-      <div className="mt-10 bg-white p-6 rounded-xl shadow">
-        <h2 className="text-2xl mb-4 text-green-600">Book Consultation</h2>
-        <form onSubmit={handleBookConsultation} className="space-y-4 max-w-md">
-          <div>
-            <label className="block font-medium mb-1">Name</label>
-            <input
-              className="w-full p-2 rounded border border-gray-300"
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              required
-            />
-          </div>
-          <div>
-            <label className="block font-medium mb-1">Email</label>
-            <input
-              className="w-full p-2 rounded border border-gray-300"
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              required
-            />
-          </div>
-          <button
-            className="btn bg-linear-to-r from-green-600 to-green-800 py-3 px-4 text-[16px] text-white"
-            type="submit"
-          >
-            Book Now
-          </button>
-        </form>
-      </div>
+              <label className="label">Product Name</label>
+              <input
+                type="text"
+                className="input"
+                placeholder="Product Name"
+              />
+
+              <label className="label">Buyer Name</label>
+              <input type="text" className="input" placeholder=" Buyer-Name" />
+
+              <label className="label">Buyer Email</label>
+              <input type="email" className="input" placeholder="Buyer-Email" />
+
+              <label className="label">Quantity</label>
+              <input type="number" className="input" placeholder="Quantity" />
+
+              <label className="label">Price</label>
+              <input type="number" className="input" placeholder="Price" />
+
+              <label className="label">Address</label>
+              <input type="text" className="input" placeholder="Address" />
+
+              <label className="label">Phone</label>
+              <input type="text" className="input" placeholder="Phone" />
+
+              <label className="label">Additional Note</label>
+              <textarea type="text" className="input" placeholder="Additional Note" />
+              <button type="submit" className="btn btn-primary">Order</button>
+            </form>
+          
+        </div>
+      </dialog>
     </section>
   );
 };

@@ -37,7 +37,7 @@ const AddServices = () => {
       axios
         .post("http://localhost:3000/services", fromData)
         .then((response) => {
-          toast.success("Service added successfully!");
+          toast.success("Product added successfully!");
           console.log("Service added:", response.data);
         })
         .catch((error) => {
