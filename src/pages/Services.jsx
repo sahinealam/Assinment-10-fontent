@@ -3,14 +3,13 @@ import { Link } from "react-router";
 
 const Services = () => {
   const [service, setServices] = useState([]);
-  const [category,setCatagory]= useState('');
+  const [category, setCatagory] = useState("");
 
   useEffect(() => {
     fetch(`http://localhost:3000/services?category=${category}`)
       .then((res) => res.json())
       .then((servicesData) => {
         setServices(servicesData);
-        
       })
       .catch((error) => {
         console.error("Error fetching services:", error);
@@ -22,9 +21,13 @@ const Services = () => {
   return (
     <div className="space-y-12">
       {/* dop wan add */}
-      <select onChange={(e)=> setCatagory(e.target.value)} defaultValue="Chose category" className="select">
+      <select
+        onChange={(e) => setCatagory(e.target.value)}
+        defaultValue="Chose category"
+        className="select"
+      >
         <option disabled={true}>Chose category</option>
-         <option value="">All</option>
+        <option value="">All</option>
         <option value="Pets">Pets</option>
         <option value="Food">Food</option>
         <option value="Accessories">Accessories</option>

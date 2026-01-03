@@ -21,7 +21,7 @@ const Home = () => {
             Top Rated animals
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.slice(0, 3).map((animal) => (
+            {services.slice(0, 4).map((animal) => (
               <div
                 key={animal.serviceId}
                 className="rounded-2xl p-4 shadow hover:shadow-lg transition bg-white"

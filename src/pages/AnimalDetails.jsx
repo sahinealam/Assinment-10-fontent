@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaStar, FaWarehouse } from "react-icons/fa";
-import { useParams } from "react-router";
+import { data, useParams } from "react-router";
 import Loading from "./Loading";
 import { toast } from "react-toastify";
+import { AuthContext } from "../provider/AuthProvider";
+import Services from "./Services";
+import axios from "axios";
 
 const AnimalDetails = () => {
   const { serviceId } = useParams();
   const [animal, setAnimals] = useState(null);
   const [loaded, setLoaded] = useState(false);
+  const { user } = useContext(AuthContext);
+  
 
   useEffect(() => {
     fetch(`http://localhost:3000/services/${serviceId}`)
@@ -23,6 +28,40 @@ const AnimalDetails = () => {
         setLoaded(true);
       });
   }, [serviceId]);
+   
+  const handleOrder = (e)=>{
+    e.preventDefault();
+    const from=e.target;
+    const productName= from.productName.value;
+    const buyerName= from.buyerName.value;
+    const buyerEmail= from.buyerEmail.value;
+    const quantity= parseInt(from.quantity.value);
+    const price= parseInt(from.price.value);
+    const address= from.address.value;
+    const phone= from.phone.value;
+    const additionalNote= from.additionalNote.value;
+    const fromData={
+      productId: serviceId,
+      productName,
+      buyerName,
+      buyerEmail,
+      quantity,
+      price,
+      address,
+      phone,
+      additionalNote,
+      data: new Date()
+    }
+    axios.post('http://localhost:3000/orders', fromData)
+    .then((response)=>{
+      console.log(fromData)
+      toast.success("Order placed successfully!")
+      // console.log("Order placed:", response.data);
+    })
+    .catch((error)=>{
+      console.error("Error placing order:", error);
+    });
+  } 
 
   if (!loaded) return <Loading />;
 
@@ -33,11 +72,11 @@ const AnimalDetails = () => {
       </div>
     );
 
-  const handleBookConsultation = (e) => {
-    e.preventDefault();
-    e.target.reset();
-    toast.success("Consultation booked successfully!");
-  };
+  // const handleBookConsultation = (e) => {
+  //   e.preventDefault();
+  //   e.target.reset();
+  //   toast.success("Consultation booked successfully!");
+  // };
 
   return (
     <section className="w-11/12 mx-auto my-10 space-y-5">
@@ -53,7 +92,7 @@ const AnimalDetails = () => {
             </div>
             <div className="ml-[50px]">
               <div className="md:ml-10">
-                <h1 className="text-4xl font-bold">{animal.serviceName}</h1>
+                <h1 className="text-4xl font-bold"> {animal?.serviceName}</h1>
                 <p className="mt-2 text-xl">
                   Price:{" "}
                   <span className="text-[#632EE3] text-2xl">
@@ -95,7 +134,7 @@ const AnimalDetails = () => {
         className="btn"
         onClick={() => document.getElementById("my_modal_3").showModal()}
       >
-     Adapt/Oder
+        Adapt/Oder
       </button>
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
@@ -105,40 +144,62 @@ const AnimalDetails = () => {
               ✕
             </button>
           </form>
-           {/* form copy */}
-            <form className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
-              <legend className="fieldset-legend"> Order details</legend>
+          {/* form copy */}
+          <form onSubmit={handleOrder} className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
+            <legend className="fieldset-legend"> Order details</legend>
 
-              <label className="label">Product Name</label>
-              <input
-                type="text"
-                className="input"
-                placeholder="Product Name"
-              />
+            <label className="label">Product Name</label>
+            <input
+              readOnly
+              defaultValue={animal?.serviceName}
+              name="productName"
+              type="text"
+              className="input"
+              placeholder="Product Name"
+            />
 
-              <label className="label">Buyer Name</label>
-              <input type="text" className="input" placeholder=" Buyer-Name" />
+            <label className="label">Buyer Name</label>
+            <input
+              defaultValue={user?.displayName}
+              name="buyerName"
+              type="text"
+              className="input"
+              placeholder=" Buyer-Name"
+            />
 
-              <label className="label">Buyer Email</label>
-              <input type="email" className="input" placeholder="Buyer-Email" />
+            <label className="label">Buyer Email</label>
+            <input
+            readOnly
+              defaultValue={user?.email}
+              name="buyerEmail"
+              type="email"
+              className="input"
+              placeholder="Buyer-Email"
+            />
 
-              <label className="label">Quantity</label>
-              <input type="number" className="input" placeholder="Quantity" />
+            <label className="label">Quantity</label>
+            <input required type="number" name="quantity" className="input" placeholder="Quantity" />
 
-              <label className="label">Price</label>
-              <input type="number" className="input" placeholder="Price" />
+            <label className="label">Price</label>
+            <input  readOnly defaultValue={animal?.price} name="price" type="number" className="input" placeholder="Price" />
 
-              <label className="label">Address</label>
-              <input type="text" className="input" placeholder="Address" />
+            <label className="label">Address</label>
+            <input type="text" required name="address" className="input" placeholder="Address" />
 
-              <label className="label">Phone</label>
-              <input type="text" className="input" placeholder="Phone" />
+            <label className="label">Phone</label>
+            <input name="phone" required type="text" className="input" placeholder="Phone" />
 
-              <label className="label">Additional Note</label>
-              <textarea type="text" className="input" placeholder="Additional Note" />
-              <button type="submit" className="btn btn-primary">Order</button>
-            </form>
-          
+            <label className="label">Additional Note</label>
+            <textarea
+              type="text"
+              className="input"
+              name="additionalNote"
+              placeholder="Additional Note"
+            />
+            <button type="submit" className="btn btn-primary">
+              Order
+            </button>
+          </form>
         </div>
       </dialog>
     </section>
