@@ -7,7 +7,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import Services from "./Services";
 import axios from "axios";
 
-const AnimalDetails = () => {
+const ServicesDetails = () => {
   const { serviceId } = useParams();
   const [animal, setAnimals] = useState(null);
   const [loaded, setLoaded] = useState(false);
@@ -50,7 +50,7 @@ const AnimalDetails = () => {
       address,
       phone,
       additionalNote,
-      data: new Date()
+      date: new Date()
     }
     axios.post('http://localhost:3000/orders', fromData)
     .then((response)=>{
@@ -68,7 +68,7 @@ const AnimalDetails = () => {
   if (!animal)
     return (
       <div className="text-center text-red-500 text-xl mt-10">
-        Animal not found
+       Servise not found.
       </div>
     );
 
@@ -206,4 +206,4 @@ const AnimalDetails = () => {
   );
 };
 
-export default AnimalDetails;
+export default ServicesDetails;

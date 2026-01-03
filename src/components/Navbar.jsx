@@ -38,36 +38,42 @@ const Navbar = () => {
         >
           Services
         </NavLink>
-       {
-        user && (
+        {user && (
           <>
-           <NavLink
-          to="/add-services"
-          className={({ isActive }) =>
-            isActive ? "text-green-500 underline" : ""
-          }
-        >
-          AddServices
-        </NavLink>
-        <NavLink
-          to="/my-services"
-          className={({ isActive }) =>
-            isActive ? "text-green-500 underline" : ""
-          }
-        >
-          My-Services
-        </NavLink>
-        <NavLink
-          to="/myprofile"
-          className={({ isActive }) =>
-            isActive ? "text-green-500 underline" : ""
-          }
-        >
-          My Profile
-        </NavLink>
+            <NavLink
+              to="/add-services"
+              className={({ isActive }) =>
+                isActive ? "text-green-500 underline" : ""
+              }
+            >
+              AddServices
+            </NavLink>
+            <NavLink
+              to="/my-services"
+              className={({ isActive }) =>
+                isActive ? "text-green-500 underline" : ""
+              }
+            >
+              My-Services
+            </NavLink>
+            <NavLink
+              to="/my-orders"
+              className={({ isActive }) =>
+                isActive ? "text-green-500 underline" : ""
+              }
+            >
+              My Orders
+            </NavLink>
+            <NavLink
+              to="/myprofile"
+              className={({ isActive }) =>
+                isActive ? "text-green-500 underline" : ""
+              }
+            >
+              My Profile
+            </NavLink>
           </>
-        )
-       }
+        )}
       </div>
 
       <div className="flex justify-center items-center gap-4">

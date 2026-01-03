@@ -24,9 +24,9 @@ const MyServices = () => {
 
       .then((res) => {
         console.log(res.data);
-        const filterData = myservice.filter((service)=> service._id != id )
+        const filterData = myservice.filter((service) => service._id != id);
         console.log(filterData);
-        setMyServices(filterData)
+        setMyServices(filterData);
       })
       .catch((err) => {
         console.log(err);
@@ -34,7 +34,6 @@ const MyServices = () => {
   };
   return (
     <div>
-     
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -61,7 +60,7 @@ const MyServices = () => {
                       </div>
                     </div>
                     <div>
-                      <div className="font-bold">Hart Hagerty</div>
+                      <div className="font-bold">{service?.name}</div>
                       <div className="text-sm opacity-50">United States</div>
                     </div>
                   </div>
@@ -86,16 +85,6 @@ const MyServices = () => {
               </tr>
             ))}
           </tbody>
-          {/* foot */}
-          {/* <tfoot>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
-              <th></th>
-            </tr>
-          </tfoot> */}
         </table>
       </div>
     </div>

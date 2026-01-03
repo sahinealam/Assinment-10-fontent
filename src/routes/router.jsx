@@ -9,11 +9,12 @@ import MyProfile from "../pages/MyProfile";
 import PriviteRoute from "../provider/PriviteRoute";
 import Error from "../components/Error";
 import Services from "../pages/Services";
-import AnimalDetails from "../pages/AnimalDetails";
+import AnimalDetails from "../pages/ServicesDetails";
 import AddServices from "../pages/AddServices";
 import MyServervices from "../pages/MyServices";
 import MyServices from "../pages/MyServices";
 import UpdateService from "../pages/UpdateService";
+import MyOrders from "../pages/MyOrders";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +51,14 @@ export const router = createBrowserRouter([
         element: (
           <PriviteRoute>
             <MyProfile></MyProfile>
+          </PriviteRoute>
+        ),
+      },
+        {
+        path: "/my-orders",
+        element: (
+          <PriviteRoute>
+            <MyOrders></MyOrders>
           </PriviteRoute>
         ),
       },
