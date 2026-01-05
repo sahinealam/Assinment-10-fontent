@@ -1,6 +1,7 @@
+
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-import { Link } from "react-router";
+import { Link } from "react-router-dom"; // fixed import
 import axios from "axios";
 
 const MyServices = () => {
@@ -10,7 +11,6 @@ const MyServices = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    // stop API call if user not loaded yet
     if (!user?.email) {
       setLoading(false);
       return;
@@ -19,10 +19,9 @@ const MyServices = () => {
     setLoading(true);
 
     axios
-      .get("http://localhost:3000/my-services", {
-        params: { email: user.email },
-      })
+      .get("http://localhost:3000/my-services", { params: { email: user.email } })
       .then((res) => {
+        console.log("Fetched services:", res.data);
         setMyServices(res.data);
         setError("");
       })
@@ -30,31 +29,20 @@ const MyServices = () => {
         console.error(err);
         setError("Failed to load services");
       })
-      .finally(() => {
-        setLoading(false);
-      });
+      .finally(() => setLoading(false));
   }, [user?.email]);
 
   const handleDelete = (id) => {
     axios
       .delete(`http://localhost:3000/delete/${id}`)
       .then(() => {
-        const remaining = myServices.filter(
-          (service) => service._id !== id
-        );
-        setMyServices(remaining);
+        setMyServices(myServices.filter((service) => service._id !== id));
       })
       .catch((err) => console.error(err));
   };
 
-  // ---------- UI STATES ----------
-  if (loading) {
-    return <p className="text-center mt-10">Loading services...</p>;
-  }
-
-  if (error) {
-    return <p className="text-center text-red-500 mt-10">{error}</p>;
-  }
+  if (loading) return <p className="text-center mt-10">Loading services...</p>;
+  if (error) return <p className="text-center text-red-500 mt-10">{error}</p>;
 
   return (
     <div className="p-4">
@@ -74,7 +62,6 @@ const MyServices = () => {
                 <th>Action</th>
               </tr>
             </thead>
-
             <tbody>
               {myServices.map((service, index) => (
                 <tr key={service._id}>
@@ -91,9 +78,7 @@ const MyServices = () => {
                     </button>
 
                     <Link to={`/update-service/${service._id}`}>
-                      <button className="btn btn-primary btn-xs">
-                        Edit
-                      </button>
+                      <button className="btn btn-primary btn-xs">Edit</button>
                     </Link>
                   </td>
                 </tr>
@@ -107,3 +92,4 @@ const MyServices = () => {
 };
 
 export default MyServices;
+

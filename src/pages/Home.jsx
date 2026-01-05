@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swiper from "../components/Swiper";
 
+
 const Home = () => {
   const [services, setServices] = useState([]);
 
@@ -14,34 +15,34 @@ const Home = () => {
 
   return (
     <>
-      <Swiper animals={services}></Swiper>
+      <Swiper services={services}></Swiper>
       <div className="space-y-12">
         <section className="text-center">
           <h2 className="text-3xl font-bold text-green-700 mb-6">
-            Top Rated animals
+            Recent Listings
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.slice(0, 4).map((animal) => (
+            {services.slice(0, 6).map((service) => (
               <div
-                key={animal.serviceId}
+                key={service.serviceId}
                 className="rounded-2xl p-4 shadow hover:shadow-lg transition bg-white"
               >
                 <img
-                  src={animal.image}
-                  alt={animal.serviceName}
+                  src={service.image}
+                  alt={service.serviceName}
                   className="w-full h-[450px] object-cover rounded-lg"
                 />
                 <h3 className="text-xl font-semibold mt-3">
-                  {animal.serviceName}
+                  {service.serviceName}
                 </h3>
-                <p className="text-green-600 font-medium">${animal.price}</p>
-                <p className="text-yellow-500">{animal?.date}</p>
+                <p className="text-green-600 font-medium">${service?.price}</p>
+                <p className="text-yellow-500">{service?.location}</p>
                 {/* error */}
                 <Link
-                  to={`/services/${animal?._id}`}
+                  to={`/services/${service?._id}`}
                   className="mt-3 inline-block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
                 >
-                  View Details
+                See Details
                 </Link>
               </div>
             ))}
@@ -55,6 +56,9 @@ const Home = () => {
             Show All
           </Link>
         </div>
+
+        
+         
       </div>
     </>
   );

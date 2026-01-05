@@ -8,13 +8,13 @@ import MyProfile from "../pages/MyProfile";
 
 import PriviteRoute from "../provider/PriviteRoute";
 import Error from "../components/Error";
-import Services from "../pages/Services";
-import AnimalDetails from "../pages/ServicesDetails";
 import AddServices from "../pages/AddServices";
-import MyServervices from "../pages/MyServices";
+
 import MyServices from "../pages/MyServices";
 import UpdateService from "../pages/UpdateService";
 import MyOrders from "../pages/MyOrders";
+import ServicesDetails from "../pages/ServicesDetails";
+import PetsSupplies from "../pages/PetsSupplies";
 
 export const router = createBrowserRouter([
   {
@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/services",
-        element: <Services></Services>,
+        element: <PetsSupplies></PetsSupplies>,
       },
 
       {
@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
         path: "/services/:serviceId",
         element: (
           <PriviteRoute>
-            <AnimalDetails></AnimalDetails>
+            <ServicesDetails></ServicesDetails>
           </PriviteRoute>
         ),
       },
@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
           </PriviteRoute>
         ),
       },
-        {
+      {
         path: "/my-orders",
         element: (
           <PriviteRoute>
@@ -74,15 +74,15 @@ export const router = createBrowserRouter([
         path: "/my-services",
         element: (
           <PriviteRoute>
-          <MyServices></MyServices>
+            <MyServices></MyServices>
           </PriviteRoute>
         ),
       },
-        {
+      {
         path: "/update-service/:id",
         element: (
           <PriviteRoute>
-          <UpdateService></UpdateService>
+            <UpdateService></UpdateService>
           </PriviteRoute>
         ),
       },

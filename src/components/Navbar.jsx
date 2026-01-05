@@ -36,7 +36,7 @@ const Navbar = () => {
             isActive ? "text-green-500 underline" : ""
           }
         >
-          Services
+         Pets & Supplies
         </NavLink>
         {user && (
           <>
