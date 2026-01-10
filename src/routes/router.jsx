@@ -15,6 +15,7 @@ import UpdateService from "../pages/UpdateService";
 import MyOrders from "../pages/MyOrders";
 import ServicesDetails from "../pages/ServicesDetails";
 import PetsSupplies from "../pages/PetsSupplies";
+import CategoryFilteredProducts from "../components/CategoryFilteredProducts";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,17 @@ export const router = createBrowserRouter([
           </PriviteRoute>
         ),
       },
+      
+        // Category Filtered Products Route
+      {
+        path: "category-filtered-product/:categoryName",
+        element: (
+          <PriviteRoute>
+            <CategoryFilteredProducts />
+          </PriviteRoute>
+        ),
+      },
+    
       {
         path: "/myprofile",
         element: (

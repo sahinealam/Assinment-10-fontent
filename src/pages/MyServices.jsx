@@ -1,7 +1,7 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-import { Link } from "react-router-dom"; // fixed import
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const MyServices = () => {
@@ -55,7 +55,7 @@ const MyServices = () => {
           <table className="table">
             <thead>
               <tr>
-                <th>#</th>
+                <th>Serial</th>
                 <th>Service Name</th>
                 <th>Category</th>
                 <th>Price</th>
