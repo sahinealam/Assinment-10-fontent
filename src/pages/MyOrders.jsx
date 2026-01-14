@@ -1,26 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { AuthContext } from "../provider/AuthProvider";
 
 const MyOrders = () => {
+  const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!user?.email) {
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
     axios
-      .get("http://localhost:3000/orders")
+      .get("http://localhost:3000/orders", { params: { email: user.email } })
       .then((res) => {
+        console.log("Fetched orders:", res.data);
         setOrders(res.data);
-        setLoading(false);
+        setError(null);
       })
       .catch((err) => {
         console.error(err);
-        setError("Failed to  backend server .");
-        setLoading(false);
-      });
-  }, []);
+        setError("Failed to load orders.");
+      })
+      .finally(() => setLoading(false));
+  }, [user?.email]);
 
   const downloadPDF = () => {
     if (!orders.length) return alert("No orders to export.");
@@ -44,10 +53,10 @@ const MyOrders = () => {
       index + 1,
       order.productName,
       order.buyerName,
-      order.price,
-      order.quantity,
-      order.address,
-      order.phone,
+      order.price || "-",
+      order.quantity || "-",
+      order.address || "-",
+      order.phone || "-",
       new Date(order.date).toLocaleDateString(),
     ]);
 
@@ -63,60 +72,81 @@ const MyOrders = () => {
     doc.save("my_orders_report.pdf");
   };
 
-  if (loading) return <p>Loading orders...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
+  if (!user?.email)
+    return <p className="text-center mt-10">Please log in to view orders.</p>;
+  if (loading) return <p className="text-center mt-10">Loading orders...</p>;
+  if (error) return <p className="text-center text-red-500 mt-10">{error}</p>;
 
   return (
     <div className="p-4">
-     
-
-      {/* Responsive table wrapper */}
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="px-2 py-1 text-left text-sm font-medium text-gray-700">#</th>
-              <th className="px-2 py-1 text-left text-sm font-medium text-gray-700">Product Name</th>
-              <th className="px-2 py-1 text-left text-sm font-medium text-gray-700">Buyer Name</th>
-              <th className="px-2 py-1 text-left text-sm font-medium text-gray-700">Price</th>
-              <th className="px-2 py-1 text-left text-sm font-medium text-gray-700">Quantity</th>
-              <th className="px-2 py-1 text-left text-sm font-medium text-gray-700">Address</th>
-              <th className="px-2 py-1 text-left text-sm font-medium text-gray-700">Phone</th>
-              <th className="px-2 py-1 text-left text-sm font-medium text-gray-700">Date</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-100">
-            {orders.map((order, index) => (
-              <tr key={index}>
-                <td className="px-2 py-1 text-sm text-gray-700">{index + 1}</td>
-                <td className="px-2 py-1 text-sm text-gray-700">{order.productName}</td>
-                <td className="px-2 py-1 text-sm text-gray-700">{order.buyerName}</td>
-                <td className="px-2 py-1 text-sm text-gray-700">{order.price}</td>
-                <td className="px-2 py-1 text-sm text-gray-700">{order.quantity}</td>
-                <td className="px-2 py-1 text-sm text-gray-700">{order.address}</td>
-                <td className="px-2 py-1 text-sm text-gray-700">{order.phone}</td>
-                <td className="px-2 py-1 text-sm text-gray-700">{new Date(order.date).toLocaleDateString()}</td>
+      <h2 className="text-2xl font-bold mb-4">My Orders</h2>
+      {orders.length === 0 ? (
+        <p className="text-center">No orders found.</p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-100">
+              <tr>
+                {[
+                  "#",
+                  "Product Name",
+                  "Buyer Name",
+                  "Price",
+                  "Quantity",
+                  "Address",
+                  "Phone",
+                  "Date",
+                ].map((col) => (
+                  <th
+                    key={col}
+                    className="px-2 py-1 text-left text-sm font-medium text-gray-700"
+                  >
+                    {col}
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-         {/* Download button add*/}
-         <br />
-      <div className="flex justify-end mb-2">
-        <button
-          onClick={downloadPDF}
-          className="btn btn-primary btn-sm"
-        >
-          Download Report
-        </button>
-      </div>
-      </div>
-      
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-100">
+              {orders.map((order, index) => (
+                <tr key={order._id || index}>
+                  <td className="px-2 py-1 text-sm text-gray-700">
+                    {index + 1}
+                  </td>
+                  <td className="px-2 py-1 text-sm text-gray-700">
+                    {order.productName}
+                  </td>
+                  <td className="px-2 py-1 text-sm text-gray-700">
+                    {order.buyerName}
+                  </td>
+                  <td className="px-2 py-1 text-sm text-gray-700">
+                    {order.price || "-"}
+                  </td>
+                  <td className="px-2 py-1 text-sm text-gray-700">
+                    {order.quantity || "-"}
+                  </td>
+                  <td className="px-2 py-1 text-sm text-gray-700">
+                    {order.address || "-"}
+                  </td>
+                  <td className="px-2 py-1 text-sm text-gray-700">
+                    {order.phone || "-"}
+                  </td>
+                  <td className="px-2 py-1 text-sm text-gray-700">
+                    {new Date(order.date).toLocaleDateString()}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <div className="flex justify-end mt-4">
+            <button onClick={downloadPDF} className="btn btn-primary btn-sm">
+              Download Report
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default MyOrders;
-
-
-

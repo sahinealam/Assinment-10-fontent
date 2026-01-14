@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swiper from "../components/Swiper";
-import { FaDog } from "react-icons/fa";
-
-const categories = [
-  { name: "Pets", emoji: <FaDog /> },
-  { name: "Food", emoji: "🍖" },
-  { name: "Accessories", emoji: "🧸" },
-  { name: "Care Product", emoji: "💊" },
-];
+import MeetOurExpert from "../components/MeetOurExpert";
+import AdoptFromPawMart from "../components/AdoptFromPawMart";
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -18,6 +12,13 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, []);
+
+  const categories = [
+    { name: "Pets", emoji: "🐶" },
+    { name: "Food", emoji: "🍖" },
+    { name: "Accessories", emoji: "🧸" },
+    { name: "Care Product", emoji: "💊" },
+  ];
 
   return (
     <>
@@ -34,9 +35,7 @@ const Home = () => {
             {categories.map((category) => (
               <Link
                 key={category.name}
-                to={`/category-filtered-product/${encodeURIComponent(
-                  category.name
-                )}`}
+                to={`/category-filtered-product/${category.name}`}
                 className="rounded-2xl p-6 shadow hover:shadow-lg transition bg-white flex flex-col items-center justify-center"
               >
                 <span className="text-4xl sm:text-5xl">{category.emoji}</span>
@@ -54,7 +53,7 @@ const Home = () => {
             Recent Listings
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.slice(0, 3).map((service) => (
+            {services.slice(0, 6).map((service) => (
               <div
                 key={service._id}
                 className="rounded-2xl p-4 shadow hover:shadow-lg transition bg-white flex flex-col"
@@ -91,6 +90,8 @@ const Home = () => {
             Show All
           </Link>
         </div>
+        <AdoptFromPawMart></AdoptFromPawMart>
+        <MeetOurExpert></MeetOurExpert>
       </div>
     </>
   );
