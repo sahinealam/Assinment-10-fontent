@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "/services",
+        path: "/allservices",
         element: <PetsSupplies></PetsSupplies>,
       },
 
@@ -47,8 +47,8 @@ export const router = createBrowserRouter([
           </PriviteRoute>
         ),
       },
-      
-        // Category Filtered Products Route
+
+      // Category Filtered Products Route
       {
         path: "category-filtered-product/:categoryName",
         element: (
@@ -57,7 +57,7 @@ export const router = createBrowserRouter([
           </PriviteRoute>
         ),
       },
-    
+
       {
         path: "/myprofile",
         element: (
@@ -107,3 +107,6 @@ export const router = createBrowserRouter([
 ]);
 
 export default router;
+
+
+

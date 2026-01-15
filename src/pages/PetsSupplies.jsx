@@ -6,7 +6,11 @@ const PetsSupplies = () => {
   const [category, setCategory] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:3000/services?category=${category}`)
+    const url = category
+      ? `http://localhost:3000/allservices?category=${(category)}`
+      : `http://localhost:3000/allservices`;
+
+    fetch(url)
       .then((res) => res.json())
       .then((data) => setServices(data))
       .catch((err) => console.error("Error fetching services:", err));
@@ -34,7 +38,7 @@ const PetsSupplies = () => {
           Top Rated Indoor Pets & Supplies
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {services.map((item) => (
             <div
               key={item._id}
@@ -45,18 +49,14 @@ const PetsSupplies = () => {
                 alt={item.serviceName}
                 className="w-full h-64 sm:h-72 md:h-80 lg:h-64 xl:h-72 object-cover rounded-lg"
               />
-
               <h3 className="text-lg sm:text-xl md:text-xl font-semibold mt-3">
                 {item.serviceName}
               </h3>
-
               <p className="text-green-600 font-medium mt-1">
                 {item.price > 0 ? `$${item.price}` : "Free for Adoption"}
               </p>
-
               <p className="text-yellow-500 mt-1">{item.category}</p>
               <p className="text-yellow-500 mt-1">{item?.location}</p>
-
               <Link
                 to={`/services/${item._id}`}
                 className="mt-3 inline-block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 text-sm sm:text-base"

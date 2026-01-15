@@ -88,7 +88,7 @@ const MyOrders = () => {
             <thead className="bg-gray-100">
               <tr>
                 {[
-                  "#",
+                  "Serial",
                   "Product Name",
                   "Buyer Name",
                   "Price",

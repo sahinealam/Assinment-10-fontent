@@ -31,7 +31,7 @@ const Navbar = () => {
           Home
         </NavLink>
         <NavLink
-          to="/services"
+          to="/allservices"
           className={({ isActive }) =>
             isActive ? "text-green-500 underline" : ""
           }

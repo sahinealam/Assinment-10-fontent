@@ -3,9 +3,7 @@ import React from "react";
 const Swiper = () => {
   return (
     <div className="w-full overflow-hidden">
-
       <div className="carousel w-full rounded-xl overflow-hidden">
-
         {/* Slide 1 */}
         <div
           id="slide1"
@@ -25,10 +23,16 @@ const Swiper = () => {
             </p>
           </div>
           <div className="absolute inset-x-3 top-1/2 flex -translate-y-1/2 justify-between">
-            <a href="#slide3" className="btn btn-circle btn-xs sm:btn-sm md:btn-md">
+            <a
+              href="#slide3"
+              className="btn btn-circle btn-xs sm:btn-sm md:btn-md"
+            >
               ❮
             </a>
-            <a href="#slide2" className="btn btn-circle btn-xs sm:btn-sm md:btn-md">
+            <a
+              href="#slide2"
+              className="btn btn-circle btn-xs sm:btn-sm md:btn-md"
+            >
               ❯
             </a>
           </div>
@@ -53,10 +57,16 @@ const Swiper = () => {
             </p>
           </div>
           <div className="absolute inset-x-3 top-1/2 flex -translate-y-1/2 justify-between">
-            <a href="#slide1" className="btn btn-circle btn-xs sm:btn-sm md:btn-md">
+            <a
+              href="#slide1"
+              className="btn btn-circle btn-xs sm:btn-sm md:btn-md"
+            >
               ❮
             </a>
-            <a href="#slide3" className="btn btn-circle btn-xs sm:btn-sm md:btn-md">
+            <a
+              href="#slide3"
+              className="btn btn-circle btn-xs sm:btn-sm md:btn-md"
+            >
               ❯
             </a>
           </div>
@@ -68,7 +78,7 @@ const Swiper = () => {
           className="carousel-item relative w-full aspect-[3/2] sm:aspect-[16/9] lg:aspect-[21/9]"
         >
           <img
-            src="https://media.cntraveler.com/photos/53d9bf256dec627b149ce9f7/16:9/w_1280,c_limit/mei-xiang-giant-panda.jpg"
+            src="https://media.istockphoto.com/id/1420676204/photo/portrait-of-a-royal-bengal-tiger-alert-and-staring-at-the-camera-national-animal-of-bangladesh.jpg?s=612x612&w=0&k=20&c=0OCYv99Ktv3fJ-YYlg7SetHBJj3pIk58WY7GDy5VCtI="
             alt="Happy pets"
             className="w-full h-full object-cover"
           />
@@ -81,15 +91,20 @@ const Swiper = () => {
             </p>
           </div>
           <div className="absolute inset-x-3 top-1/2 flex -translate-y-1/2 justify-between">
-            <a href="#slide2" className="btn btn-circle btn-xs sm:btn-sm md:btn-md">
+            <a
+              href="#slide2"
+              className="btn btn-circle btn-xs sm:btn-sm md:btn-md"
+            >
               ❮
             </a>
-            <a href="#slide1" className="btn btn-circle btn-xs sm:btn-sm md:btn-md">
+            <a
+              href="#slide1"
+              className="btn btn-circle btn-xs sm:btn-sm md:btn-md"
+            >
               ❯
             </a>
           </div>
         </div>
-
       </div>
     </div>
   );

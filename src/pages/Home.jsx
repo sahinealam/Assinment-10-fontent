@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { data, Link } from "react-router-dom";
 import Swiper from "../components/Swiper";
 import MeetOurExpert from "../components/MeetOurExpert";
 import AdoptFromPawMart from "../components/AdoptFromPawMart";
@@ -11,6 +11,7 @@ const Home = () => {
     fetch("http://localhost:3000/services")
       .then((res) => res.json())
       .then((data) => setServices(data));
+    console.log(services);
   }, []);
 
   const categories = [
@@ -69,6 +70,8 @@ const Home = () => {
                 <p className="text-green-600 font-medium mt-1">
                   ${service?.price}
                 </p>
+                <p className="text-yellow-500">{service?.category}</p>
+
                 <p className="text-yellow-500">{service?.location}</p>
                 <Link
                   to={`/services/${service?._id}`}
@@ -84,7 +87,7 @@ const Home = () => {
         {/* Show All Button */}
         <div className="flex justify-center items-center mt-10">
           <Link
-            to="/services"
+            to="/allservices"
             className="bg-gradient-to-r from-green-600 to-green-800 py-3 px-6 text-base sm:text-lg text-white rounded-lg hover:from-green-700 hover:to-green-900 transition"
           >
             Show All
