@@ -18,9 +18,11 @@ const MyOrders = () => {
 
     setLoading(true);
     axios
-      .get("http://localhost:3000/orders", { params: { email: user.email } })
+      .get("https://backend-10-pink.vercel.app0/orders", {
+        params: { email: user.email },
+      })
       .then((res) => {
-        console.log("Fetched orders:", res.data);
+        // console.log("Fetched orders:", res.data);
         setOrders(res.data);
         setError(null);
       })

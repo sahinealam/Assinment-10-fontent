@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,10 +11,12 @@ const UpdateService = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/services/${id}`).then((res) => {
-      setService(res.data);
-      setCategory(res.data?.category || "");
-    });
+    axios
+      .get(`https://backend-10-pink.vercel.app0/services/${id}`)
+      .then((res) => {
+        setService(res.data);
+        setCategory(res.data?.category || "");
+      });
   }, [id]);
 
   const handleUpdate = (e) => {
@@ -34,7 +35,7 @@ const UpdateService = () => {
     };
 
     axios
-      .put(`http://localhost:3000/update-service/${id}`, fromData)
+      .put(`https://backend-10-pink.vercel.app0/update-service/${id}`, fromData)
       .then((res) => {
         console.log("Updated:", res.data);
         navigate("/my-services");
@@ -149,4 +150,3 @@ const UpdateService = () => {
 };
 
 export default UpdateService;
-

@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Link } from "react-router-dom";
@@ -19,7 +18,9 @@ const MyServices = () => {
     setLoading(true);
 
     axios
-      .get("http://localhost:3000/my-services", { params: { email: user.email } })
+      .get("https://backend-10-pink.vercel.app0/my-services", {
+        params: { email: user.email },
+      })
       .then((res) => {
         console.log("Fetched services:", res.data);
         setMyServices(res.data);
@@ -34,7 +35,7 @@ const MyServices = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3000/delete/${id}`)
+      .delete(`https://backend-10-pink.vercel.app0/delete/${id}`)
       .then(() => {
         setMyServices(myServices.filter((service) => service._id !== id));
       })
@@ -92,4 +93,3 @@ const MyServices = () => {
 };
 
 export default MyServices;
-

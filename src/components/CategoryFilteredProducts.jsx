@@ -16,7 +16,7 @@ const CategoryFilteredProducts = () => {
         // Encode the category name to handle spaces
         const encodedCategory = encodeURIComponent(categoryName);
         const res = await fetch(
-          `http://localhost:3000/services?category=${encodedCategory}`
+          `https://backend-10-pink.vercel.app0/services?category=${encodedCategory}`,
         );
 
         if (!res.ok) {
@@ -29,10 +29,10 @@ const CategoryFilteredProducts = () => {
         const filteredData = data.filter(
           (product) =>
             product.category &&
-            product.category.toLowerCase() === categoryName.toLowerCase()
+            product.category.toLowerCase() === categoryName.toLowerCase(),
         );
 
-        console.log("Fetched products:", filteredData);
+        // console.log("Fetched products:", filteredData);
         setProducts(filteredData);
       } catch (err) {
         console.error(err);
