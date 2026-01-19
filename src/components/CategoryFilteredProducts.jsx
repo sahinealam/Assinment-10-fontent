@@ -16,7 +16,7 @@ const CategoryFilteredProducts = () => {
         // Encode the category name to handle spaces
         const encodedCategory = encodeURIComponent(categoryName);
         const res = await fetch(
-          `https://backend-10-pink.vercel.app0/services?category=${encodedCategory}`,
+          `https://backend-10-pink.vercel.app/services?category=${encodedCategory}`,
         );
 
         if (!res.ok) {

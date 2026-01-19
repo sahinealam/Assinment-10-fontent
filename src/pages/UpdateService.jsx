@@ -12,7 +12,7 @@ const UpdateService = () => {
 
   useEffect(() => {
     axios
-      .get(`https://backend-10-pink.vercel.app0/services/${id}`)
+      .get(`https://backend-10-pink.vercel.app/services/${id}`)
       .then((res) => {
         setService(res.data);
         setCategory(res.data?.category || "");
@@ -35,7 +35,7 @@ const UpdateService = () => {
     };
 
     axios
-      .put(`https://backend-10-pink.vercel.app0/update-service/${id}`, fromData)
+      .put(`https://backend-10-pink.vercel.app/update-service/${id}`, fromData)
       .then((res) => {
         console.log("Updated:", res.data);
         navigate("/my-services");

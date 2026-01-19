@@ -12,7 +12,7 @@ const ServicesDetails = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch(`https://backend-10-pink.vercel.app0/services/${serviceId}`)
+    fetch(`https://backend-10-pink.vercel.app/services/${serviceId}`)
       .then((response) => response.json())
       .then((servicesData) => {
         setAnimals(servicesData || null);
@@ -51,7 +51,7 @@ const ServicesDetails = () => {
     };
 
     axios
-      .post("https://backend-10-pink.vercel.app0/orders", formData)
+      .post("https://backend-10-pink.vercel.app/orders", formData)
       .then(() => {
         toast.success("Order placed successfully!");
         form.reset();

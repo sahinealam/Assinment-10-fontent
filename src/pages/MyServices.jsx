@@ -18,16 +18,16 @@ const MyServices = () => {
     setLoading(true);
 
     axios
-      .get("https://backend-10-pink.vercel.app0/my-services", {
+      .get("https://backend-10-pink.vercel.app/my-services", {
         params: { email: user.email },
       })
       .then((res) => {
-        console.log("Fetched services:", res.data);
+        // console.log("Fetched services:", res.data);
         setMyServices(res.data);
         setError("");
       })
       .catch((err) => {
-        console.error(err);
+        // console.error(err);
         setError("Failed to load services");
       })
       .finally(() => setLoading(false));
@@ -35,11 +35,11 @@ const MyServices = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`https://backend-10-pink.vercel.app0/delete/${id}`)
+      .delete(`https://backend-10-pink.vercel.app/delete/${id}`)
       .then(() => {
         setMyServices(myServices.filter((service) => service._id !== id));
       })
-      .catch((err) => console.error(err));
+      // .catch((err) => console.error(err));
   };
 
   if (loading) return <p className="text-center mt-10">Loading services...</p>;

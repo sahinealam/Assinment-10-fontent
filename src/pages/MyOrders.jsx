@@ -18,7 +18,7 @@ const MyOrders = () => {
 
     setLoading(true);
     axios
-      .get("https://backend-10-pink.vercel.app0/orders", {
+      .get("https://backend-10-pink.vercel.app/orders", {
         params: { email: user.email },
       })
       .then((res) => {
@@ -27,7 +27,7 @@ const MyOrders = () => {
         setError(null);
       })
       .catch((err) => {
-        console.error(err);
+        // console.error(err);
         setError("Failed to load orders.");
       })
       .finally(() => setLoading(false));

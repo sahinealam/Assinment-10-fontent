@@ -25,7 +25,7 @@ const AddServices = () => {
 
     try {
       const res = await axios.post(
-        "https://backend-10-pink.vercel.app0/services",
+        "https://backend-10-pink.vercel.app/services",
         formData,
       );
       toast.success("Product added successfully!");
@@ -33,7 +33,7 @@ const AddServices = () => {
       form.reset();
       setSelectedCategory("");
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       toast.error("Failed to add product");
     }
   };

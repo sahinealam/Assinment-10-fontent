@@ -7,8 +7,8 @@ const PetsSupplies = () => {
 
   useEffect(() => {
     const url = category
-      ? `https://backend-10-pink.vercel.app0/allservices?category=${category}`
-      : `https://backend-10-pink.vercel.app0/allservices`;
+      ? `https://backend-10-pink.vercel.app/allservices?category=${category}`
+      : `https://backend-10-pink.vercel.app/allservices`;
 
     fetch(url)
       .then((res) => res.json())
