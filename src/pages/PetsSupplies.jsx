@@ -13,7 +13,7 @@ const PetsSupplies = () => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => setServices(data))
-      .catch((err) => console.error("Error fetching services:", err));
+      // .catch((err) => console.error("Error fetching services:", err));
   }, [category]);
 
   return (

@@ -40,7 +40,7 @@ const UpdateService = () => {
         console.log("Updated:", res.data);
         navigate("/my-services");
       })
-      .catch((err) => console.error(err));
+      // .catch((err) => console.error(err));
   };
 
   if (!service) return <p className="text-center mt-10">Loading service...</p>;

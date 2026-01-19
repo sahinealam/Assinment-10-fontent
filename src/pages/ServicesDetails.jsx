@@ -18,7 +18,7 @@ const ServicesDetails = () => {
         setAnimals(servicesData || null);
       })
       .catch((error) => {
-        console.error("Error fetching animal:", error);
+        // console.error("Error fetching animal:", error);
       })
       .finally(() => {
         setLoaded(true);
